@@ -1,3 +1,7 @@
-import SinglyLinkedList from './linked-lists/singly-linked-list';
-console.log('app.ts loaded');
-console.log(SinglyLinkedList);
+import SinglyLinkedList from './data-structures/linked-lists/singly-linked-list';
+import { linearSearch } from '../src/algorithms/search-algorithms/linear-search';
+import { generateRandomNumbers } from './test-data';
+
+let randomNumbers = generateRandomNumbers();
+
+console.log(linearSearch(randomNumbers, 50));

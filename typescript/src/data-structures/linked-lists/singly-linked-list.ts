@@ -211,7 +211,4 @@ for (let i = 0; i < 10; i++) {
   list.push(i);
 }
 
-list.reverse();
-console.log(list.get(2));
-
 export default SinglyLinkedList;
