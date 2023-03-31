@@ -6,6 +6,8 @@
  * This implementation is a singly linked list with a head, tail, and length property.
  * This implementation also provides a push, pop, shift, unshift, get, and set method.
  * This implementation also allows for getting a node at a specific index and setting a node at a specific index
+ * @todo make a circular linked list
+ * @todo refactor
  */
 import { ISinglyLinkedList, ISinglyLinkedListNode } from './types';
 
@@ -51,31 +53,67 @@ class SinglyLinkedList<T> implements ISinglyLinkedList<T> {
     this._shift();
     return this;
   }
-
   unshift(value: T): SinglyLinkedList<T> {
     this._unshift(value);
     return this;
   }
-
   // get a node at a specific index
   get(index: number): SinglyLinkedListNode<T> | null {
     return this._get(index);
   }
-
   // update the value of a node at a specific index
   set(index: number, value: T): boolean {
-    // let newNode = new SinglyLinkedListNode(value);
-    let foundNode = this.get(index);
-    if (foundNode) {
-      foundNode.value = value;
-      return true;
-    }
-    return false;
+    return this._set(index, value);
   }
 
   // insert a node at a specific index
   // @audit there might be a bug here
   insert(index: number, value: T): boolean {
+    return this._insert(index, value);
+  }
+
+  // remove a node at a specific index
+  remove = (index: number): SinglyLinkedList<T> | undefined => {
+    return this._remove(index);
+  };
+
+  // reverse the linked list in place
+  reverse = (): SinglyLinkedList<T> | undefined => {
+    this._reverse();
+    return this;
+  };
+  private _reverse = () => {
+    if (!this.head) return;
+    let current = this.head;
+    this.head = this.tail;
+    this.tail = current;
+    let next: SinglyLinkedListNode<T> | null = null;
+    let prev: SinglyLinkedListNode<T> | null = null;
+    for (let i = 0; i < this.length; i++) {
+      next = current.next;
+      current.next = prev;
+      prev = current;
+      current = next!; // non-null assertion
+    }
+    return this;
+  };
+
+  private _remove(index: number): SinglyLinkedList<T> | undefined {
+    if (index < 0 || index >= this.length) return undefined;
+    if (index === 0) return this.shift();
+    if (index === this.length - 1) return this.pop();
+    let previousNode = this.get(index - 1);
+    let nextNode = this.get(index + 1);
+    //@note above is the same as removed = previousNode.next; previousNode.next = removed.next;
+
+    if (!previousNode) return undefined;
+    if (!nextNode) return undefined;
+    previousNode.next = nextNode;
+    this.length -= 1;
+    return this;
+  }
+
+  private _insert(index: number, value: T) {
     if (index < 0 || index > this.length) return false;
     // if the index is the same as the length, push a new node to the end of the list
     if (index === this.length) return !!this.push(value);
@@ -89,6 +127,15 @@ class SinglyLinkedList<T> implements ISinglyLinkedList<T> {
     newNode.next = temp;
     this.length += 1;
     return true;
+  }
+  private _set(index: number, value: T): boolean {
+    // let newNode = new SinglyLinkedListNode(value);
+    let foundNode = this.get(index);
+    if (foundNode) {
+      foundNode.value = value;
+      return true;
+    }
+    return false;
   }
 
   private _get(index: number): SinglyLinkedListNode<T> | null {
@@ -163,15 +210,8 @@ const list = new SinglyLinkedList();
 for (let i = 0; i < 10; i++) {
   list.push(i);
 }
-console.log(list.length);
-list.shift();
-console.log(list.length);
-list.unshift(200);
-// console.log(list.head);
-console.log(list.get(5));
-console.log(list.set(5, 1000));
-console.log(list.get(5));
-console.log(list.insert(5, 500));
-console.log(list.get(5));
+
+list.reverse();
+console.log(list.get(2));
 
 export default SinglyLinkedList;
