@@ -1,3 +1,3 @@
-export interface ILinearSearch {
-  (array: number[], value: number): number;
+export interface ILinearSearch<T> {
+  (array: T[], value: T): number;
 }
