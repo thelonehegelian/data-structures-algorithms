@@ -32,18 +32,10 @@ export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
     let end = this.array.length - 1;
     let midpoint = Math.floor((start + end) / 2);
     while (this.value !== this.array[midpoint] && start <= end) {
-      if (this.value < this.array[midpoint]) {
-        end = midpoint - 1;
-      }
-
-      if (this.value > this.array[midpoint]) {
-        start = midpoint + 1;
-      }
+      if (this.value < this.array[midpoint]) end = midpoint - 1;
+      if (this.value > this.array[midpoint]) start = midpoint + 1;
       midpoint = Math.floor((start + end) / 2);
-
-      if (this.value === this.array[midpoint]) {
-        return midpoint;
-      }
+      if (this.value === this.array[midpoint]) return midpoint;
     }
 
     return -1;
