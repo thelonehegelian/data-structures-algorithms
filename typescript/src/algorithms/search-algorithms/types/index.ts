@@ -1,3 +1,4 @@
-export interface ISearch<T> {
-  (array: T[], value: T): number;
+export interface ISearchAlgorithms<T> {
+  array: T[];
+  value: T;
 }

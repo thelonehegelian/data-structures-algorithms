@@ -1,8 +1,14 @@
 import SinglyLinkedList from './data-structures/linked-lists/singly-linked-list';
-import { linearSearch } from './algorithms/search-algorithms';
+import { SearchAlgorithms } from './algorithms/search-algorithms';
 import { generateRandomNumbers, generateRandomCityNames } from './test-data';
 
 let randomNumbers = generateRandomNumbers();
 let randomCityNames = generateRandomCityNames();
 
-console.log(linearSearch(randomCityNames, 'Dallas'));
+let searchAlgorithms = new SearchAlgorithms(randomNumbers, 5);
+let SearchAlgorithmsCities = new SearchAlgorithms(randomCityNames, 'New York');
+
+// console.log(searchAlgorithms.linearSearch());
+// console.log(SearchAlgorithmsCities.linearSearch());
+console.log(searchAlgorithms.binarySearch());
+console.log(SearchAlgorithmsCities.binarySearch());
