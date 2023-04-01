@@ -21,7 +21,6 @@ export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
   };
 
   // @note in order to use binary search, the array must be sorted
-  // @audit probably takes too much memory
   public binarySearch = (): number => {
     const compareAndSort = (a: T, b: T) => {
       if (a > b) return 1;
@@ -29,27 +28,21 @@ export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
       return 0;
     };
     this.array.sort(compareAndSort);
-    let midpoint = Math.floor(this.array.length / 2);
-    // @todo refactor to reduce code duplication and control flow complexity
-    let arrayToSearch = this.array.slice(0, midpoint);
-    if (this.array[midpoint] === this.value) {
-      return midpoint;
-    }
-    if (this.array[midpoint] > this.value) {
-      for (let i = 0; i < arrayToSearch.length; i++) {
-        if (arrayToSearch[i] === this.value) {
-          return i;
-        }
+    let start = 0;
+    let end = this.array.length - 1;
+    let midpoint = Math.floor((start + end) / 2);
+    while (this.value !== this.array[midpoint] && start <= end) {
+      if (this.value < this.array[midpoint]) {
+        end = midpoint - 1;
       }
-    }
-    if (this.array[midpoint] < this.value) {
-      arrayToSearch = this.array.slice(midpoint);
-      // set new midpoint
-      midpoint = Math.floor(arrayToSearch.length / 2);
-      for (let i = 0; i < arrayToSearch.length; i++) {
-        if (arrayToSearch[i] === this.value) {
-          return i;
-        }
+
+      if (this.value > this.array[midpoint]) {
+        start = midpoint + 1;
+      }
+      midpoint = Math.floor((start + end) / 2);
+
+      if (this.value === this.array[midpoint]) {
+        return midpoint;
       }
     }
 
