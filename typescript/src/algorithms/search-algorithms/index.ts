@@ -30,23 +30,24 @@ export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
     };
     this.array.sort(compareAndSort);
     let midpoint = Math.floor(this.array.length / 2);
-    // @todo refactor to use only one array
-    // Example:
-    // let arrayToSearch = this.array.slice(0, midpoint);
-    // if not found, then: arrayToSearch = this.array.slice(midpoint);
-    let leftArray = this.array.slice(0, midpoint);
-    let rightArray = this.array.slice(midpoint);
+    // @todo refactor to reduce code duplication and control flow complexity
+    let arrayToSearch = this.array.slice(0, midpoint);
     if (this.array[midpoint] === this.value) {
       return midpoint;
-    } else if (this.array[midpoint] > this.value) {
-      for (let i = 0; i < leftArray.length; i++) {
-        if (leftArray[i] === this.value) {
+    }
+    if (this.array[midpoint] > this.value) {
+      for (let i = 0; i < arrayToSearch.length; i++) {
+        if (arrayToSearch[i] === this.value) {
           return i;
         }
       }
-    } else if (this.array[midpoint] < this.value) {
-      for (let i = 0; i < rightArray.length; i++) {
-        if (rightArray[i] === this.value) {
+    }
+    if (this.array[midpoint] < this.value) {
+      arrayToSearch = this.array.slice(midpoint);
+      // set new midpoint
+      midpoint = Math.floor(arrayToSearch.length / 2);
+      for (let i = 0; i < arrayToSearch.length; i++) {
+        if (arrayToSearch[i] === this.value) {
           return i;
         }
       }
