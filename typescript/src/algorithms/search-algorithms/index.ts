@@ -1,19 +1,20 @@
 import { ISearchAlgorithms } from './types';
 
 export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
-  array: T[];
-  value: T;
+  input: T[] | T;
+  target: T;
 
   //@audit what if someone passes an object to sort?
 
   constructor(array: T[], value: T) {
-    this.array = array;
-    this.value = value;
+    this.input = array;
+    this.target = value;
   }
 
   public linearSearch = (): number => {
-    for (let i = 0; i < this.array.length; i++) {
-      if (this.array[i] === this.value) {
+    const input = this.input as T[];
+    for (let i = 0; i < (this.input as T[]).length; i++) {
+      if (input[i] === input) {
         return i;
       }
     }
@@ -22,21 +23,30 @@ export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
 
   // @note in order to use binary search, the array must be sorted
   public binarySearch = (): number => {
+    const input = this.input as T[];
     const compareAndSort = (a: T, b: T) => {
       if (a > b) return 1;
       if (a < b) return -1;
       return 0;
     };
-    this.array.sort(compareAndSort);
+    input.sort(compareAndSort);
     let start = 0;
-    let end = this.array.length - 1;
+    let end = (this.input as T[]).length - 1;
     let midpoint = Math.floor((start + end) / 2);
-    while (this.value !== this.array[midpoint] && start <= end) {
-      if (this.value < this.array[midpoint]) end = midpoint - 1;
-      if (this.value > this.array[midpoint]) start = midpoint + 1;
+    while (this.target !== input[midpoint] && start <= end) {
+      if (this.target < input[midpoint]) end = midpoint - 1;
+      if (this.target > input[midpoint]) start = midpoint + 1;
       midpoint = Math.floor((start + end) / 2);
-      if (this.value === this.array[midpoint]) return midpoint;
+      if (this.target === input[midpoint]) return midpoint;
     }
+
+    return -1;
+  };
+
+  // @note complication: the value passed must be a string and not array of strings
+  public naiveStringSearch = (): number => {
+    if (typeof this.input !== 'string' || typeof this.target !== 'string')
+      return -1;
 
     return -1;
   };
