@@ -1,19 +1,19 @@
 import { ISearchAlgorithms } from './types';
 
 export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
-  input: T[] | T;
+  input: T | T[];
   target: T;
 
   //@audit what if someone passes an object to sort?
 
-  constructor(array: T[], value: T) {
+  constructor(array: T[] | T, value: T) {
     this.input = array;
     this.target = value;
   }
 
   public linearSearch = (): number => {
     const input = this.input as T[];
-    for (let i = 0; i < (this.input as T[]).length; i++) {
+    for (let i = 0; i < input.length; i++) {
       if (input[i] === input) {
         return i;
       }
@@ -43,10 +43,22 @@ export class SearchAlgorithms<T> implements ISearchAlgorithms<T> {
     return -1;
   };
 
-  // @note complication: the value passed must be a string and not array of strings
+  // @audit intentions and results of the algorithm are not clear
   public naiveStringSearch = (): number => {
     if (typeof this.input !== 'string' || typeof this.target !== 'string')
       return -1;
+    const input = this.input as string;
+    const target = this.target as string;
+    if (input.length < target.length) return -1;
+
+    let count = 0;
+    for (let i = 0; i < input.length; i++) {
+      for (let j = 0; j < target.length; j++) {
+        if (target[j] !== input[i + j]) break;
+        if (j === target.length - 1) count++;
+      }
+    }
+    return count;
 
     return -1;
   };
