@@ -1,4 +1,5 @@
-export class SortingAlgorithms<T> {
+import { ISortingAlgorithms } from './types';
+export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
   input: T[];
   constructor(array: T[]) {
     this.input = array;
@@ -10,20 +11,23 @@ export class SortingAlgorithms<T> {
     return 0;
   }
 
-  public nativeJsSort = () => {
+  public nativeJsSort = (): T[] => {
     return this.input.sort(this.compare);
   };
 
-  public bubbleSort = () => {
+  public bubbleSort = (): T[] => {
+    let sorted = true;
     let endOfArray = this.input.length - 1;
     let idx = 0;
     while (endOfArray > 0) {
       for (let i = 0; i < endOfArray; i++) {
         if (this.input[idx] > this.input[idx + 1]) {
           this.swap(this.input, idx, idx + 1);
+          sorted = false;
         }
         idx++;
       }
+      if (sorted) return this.input;
       idx = 0;
       endOfArray--;
     }
