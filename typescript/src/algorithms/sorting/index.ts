@@ -29,6 +29,25 @@ export class SortingAlgorithms<T> {
     }
     return this.input;
   };
+  /**
+   * Variation of bubble sort algorithm
+   * public bubbleSort = () => {
+  let endOfArray = this.input.length - 1;
+
+  for (let i = 0; i < endOfArray; i++) {
+    let innerLoopLimit = endOfArray - i;
+
+    for (let j = 0; j < innerLoopLimit; j++) {
+      if (this.input[j] > this.input[j + 1]) {
+        this.swap(this.input, j, j + 1);
+      }
+    }
+  }
+
+  return this.input;
+};
+
+   */
 
   private swap(arr: T[], idx1: number, idx2: number) {
     let temp = arr[idx1];
