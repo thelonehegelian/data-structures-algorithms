@@ -86,10 +86,26 @@ class DoublyLinkedList {
       oldHead.prev = newNode;
       newNode.next = oldHead;
       newNode.prev = null;
-      console.log('newNode', newNode);
     }
     this.length++;
     return this;
+  };
+  get = (index: number): DoublyLinkedListNode | null => {
+    if (index < 0 || index >= this.length) return null;
+    let current = this.head;
+    let count = 1;
+    let foundNode: null | DoublyLinkedListNode = null;
+    while (current) {
+      if (count === index) {
+        foundNode = current;
+        break;
+      }
+      current = current.next;
+      count++;
+    }
+    console.log(foundNode);
+    console.log(this.length);
+    return foundNode;
   };
 }
 
