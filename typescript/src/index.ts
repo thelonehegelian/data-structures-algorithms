@@ -18,9 +18,8 @@ doublyLinkedList.push(2);
 doublyLinkedList.push(3);
 doublyLinkedList.push(4);
 doublyLinkedList.push('Tail');
-doublyLinkedList.pop();
-doublyLinkedList.pop();
-doublyLinkedList.pop();
-doublyLinkedList.pop();
-doublyLinkedList.pop();
-console.log(doublyLinkedList);
+doublyLinkedList.unshift(1);
+
+doublyLinkedList.unshift('New Head');
+
+// console.log(doublyLinkedList);
