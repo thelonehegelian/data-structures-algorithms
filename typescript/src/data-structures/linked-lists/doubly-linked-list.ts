@@ -39,6 +39,23 @@ class DoublyLinkedList {
     this.length++;
     return this;
   };
+
+  pop = (): DoublyLinkedListNode | null => {
+    if (this.length === 0) return null;
+    if (this.length === 1) {
+      this.head = null;
+      this.tail = null;
+    } else {
+      // get the tail, get the prev node from the tail
+      let newTail = this.tail?.prev;
+      if (newTail) {
+        newTail.next = null;
+        this.tail = newTail;
+      }
+    }
+    this.length--;
+    return this.tail;
+  };
 }
 
 export default DoublyLinkedList;
