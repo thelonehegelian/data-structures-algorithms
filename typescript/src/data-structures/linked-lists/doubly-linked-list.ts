@@ -136,8 +136,8 @@ class DoublyLinkedList {
     }
     // if index is for any other node, use get to get the node at the index
     const newNode = new DoublyLinkedListNode(value);
-    const prevNode = this.get(index - 1);
     const nextNode = this.get(index);
+    const prevNode = nextNode?.prev;
     if (prevNode && nextNode) {
       prevNode.next = newNode;
       newNode.prev = prevNode;
@@ -147,6 +147,30 @@ class DoublyLinkedList {
       return true;
     }
     return false;
+  };
+
+  remove = (index: number): DoublyLinkedList | null => {
+    if (index < 0 || index >= this.length) return null;
+    if (index === 1) {
+      this.unshift(1);
+      return this;
+    }
+    if (index === this.length - 1) {
+      this.pop();
+      return this;
+    }
+    let nodeToRemove = this.get(index);
+    let prevNode = nodeToRemove?.prev;
+    let nextNode = nodeToRemove?.next;
+    if (prevNode && nextNode && nodeToRemove) {
+      prevNode.next = nextNode;
+      nextNode.prev = prevNode;
+      nodeToRemove.prev = null;
+      nodeToRemove.next = null;
+      this.length--;
+      return this;
+    }
+    return null;
   };
 }
 

@@ -24,5 +24,6 @@ doublyLinkedList.get(1);
 doublyLinkedList.set(2, 'New Value');
 doublyLinkedList.insert(2, 'An Inserted Value');
 doublyLinkedList.insert(0, 'An Inserted Value');
+doublyLinkedList.remove(3);
 
 // console.log(doublyLinkedList);
