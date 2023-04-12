@@ -103,9 +103,25 @@ class DoublyLinkedList {
       current = current.next;
       count++;
     }
-    console.log(foundNode);
-    console.log(this.length);
     return foundNode;
+  };
+  set = (index: number, value: any): boolean => {
+    if (index < 0 || index >= this.length) return false;
+    let current = this.head;
+    let count = 1;
+    let valueSet = false;
+    while (current) {
+      if (count === index) {
+        current.value = value;
+        valueSet = true;
+        break;
+      }
+      current = current.next;
+      count++;
+    }
+    console.log(current);
+    console.log(current?.value);
+    return valueSet;
   };
 }
 

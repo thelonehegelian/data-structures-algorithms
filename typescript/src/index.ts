@@ -21,5 +21,6 @@ doublyLinkedList.push('Tail');
 doublyLinkedList.unshift('New Head');
 
 doublyLinkedList.get(1);
+doublyLinkedList.set(2, 'New Value');
 
 // console.log(doublyLinkedList);
