@@ -22,5 +22,7 @@ doublyLinkedList.unshift('New Head');
 
 doublyLinkedList.get(1);
 doublyLinkedList.set(2, 'New Value');
+doublyLinkedList.insert(2, 'An Inserted Value');
+doublyLinkedList.insert(0, 'An Inserted Value');
 
 // console.log(doublyLinkedList);

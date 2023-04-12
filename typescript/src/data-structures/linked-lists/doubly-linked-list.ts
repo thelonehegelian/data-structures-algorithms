@@ -119,9 +119,34 @@ class DoublyLinkedList {
       current = current.next;
       count++;
     }
-    console.log(current);
-    console.log(current?.value);
     return valueSet;
+  };
+  // insert, adds the node before the specified index
+  insert = (index: number, value: any): boolean => {
+    if (index < 0 || index >= this.length || index === 0) return false;
+    // if index is for the first node, use unshift
+    if (index === 1) {
+      this.unshift(value);
+      return true;
+    }
+    // if index is for the last node, use push
+    if (index === this.length) {
+      this.push(value);
+      return true;
+    }
+    // if index is for any other node, use get to get the node at the index
+    const newNode = new DoublyLinkedListNode(value);
+    const prevNode = this.get(index - 1);
+    const nextNode = this.get(index);
+    if (prevNode && nextNode) {
+      prevNode.next = newNode;
+      newNode.prev = prevNode;
+      newNode.next = nextNode;
+      nextNode.prev = newNode;
+      this.length++;
+      return true;
+    }
+    return false;
   };
 }
 
