@@ -3,4 +3,5 @@ export interface ISortingAlgorithms<T> {
   nativeJsSort: () => T[];
   bubbleSort: () => T[];
   selectionSort: () => T[];
+  insertionSort: () => T[];
 }

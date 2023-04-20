@@ -54,6 +54,7 @@ export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
    */
 
   public selectionSort(): T[] {
+    // @todo what if the array is empty or has only one element or already sorted?
     for (let i = 0; i < this.input.length; i++) {
       let min = i;
       for (let j = i + 1; j < this.input.length; j++) {
@@ -65,6 +66,21 @@ export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
     }
     return this.input;
   }
+
+  public insertionSort(): T[] {
+    console.log(this.input);
+    for (let i = 1; i < this.input.length; i++) {
+      let currentVal = this.input[i];
+      let j = i - 1;
+      while (j >= 0 && this.input[j] > currentVal) {
+        this.input[j + 1] = this.input[j];
+        j--;
+      }
+      this.input[j + 1] = currentVal;
+    }
+    return this.input;
+  }
+
   private swap(arr: T[], idx1: number, idx2: number) {
     let temp = arr[idx1];
     arr[idx1] = arr[idx2];
