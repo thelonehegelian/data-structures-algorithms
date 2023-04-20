@@ -6,24 +6,14 @@ import { ISortingAlgorithms } from './algorithms/sorting/types/index';
 import DoublyLinkedList from './data-structures/linked-lists/doubly-linked-list';
 
 // an array of 10 sorted numbers
-const numbers = generateRandomNumbers(100000);
+const numbers = generateRandomNumbers(10);
 numbers.sort((a, b) => a - b);
 
-let randomNumbers = generateRandomNumbers(100000);
+let randomNumbers = generateRandomNumbers(10);
 let randomCityNames = generateRandomCityNames();
 
-const doublyLinkedList = new DoublyLinkedList();
-doublyLinkedList.push('Head');
-doublyLinkedList.push(2);
-doublyLinkedList.push(3);
-doublyLinkedList.push(4);
-doublyLinkedList.push('Tail');
-doublyLinkedList.unshift('New Head');
+const sortingAlgorithms: ISortingAlgorithms<number> =
+  new SortingAlgorithms<number>(randomNumbers);
 
-doublyLinkedList.get(1);
-doublyLinkedList.set(2, 'New Value');
-doublyLinkedList.insert(2, 'An Inserted Value');
-doublyLinkedList.insert(0, 'An Inserted Value');
-doublyLinkedList.remove(3);
-
-// console.log(doublyLinkedList);
+// console.log(sortingAlgorithms);
+console.log(sortingAlgorithms.selectionSort());

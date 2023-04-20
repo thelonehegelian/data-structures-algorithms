@@ -53,6 +53,18 @@ export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
 
    */
 
+  public selectionSort(): T[] {
+    for (let i = 0; i < this.input.length; i++) {
+      let min = i;
+      for (let j = i + 1; j < this.input.length; j++) {
+        if (this.input[j] < this.input[min]) {
+          min = j;
+        }
+      }
+      this.swap(this.input, i, min);
+    }
+    return this.input;
+  }
   private swap(arr: T[], idx1: number, idx2: number) {
     let temp = arr[idx1];
     arr[idx1] = arr[idx2];
