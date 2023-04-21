@@ -4,4 +4,5 @@ export interface ISortingAlgorithms<T> {
   bubbleSort: () => T[];
   selectionSort: () => T[];
   insertionSort: () => T[];
+  mergeSort: (arr: T[]) => T[];
 }

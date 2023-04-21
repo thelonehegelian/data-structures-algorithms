@@ -15,5 +15,4 @@ let randomCityNames = generateRandomCityNames();
 const sortingAlgorithms: ISortingAlgorithms<number> =
   new SortingAlgorithms<number>(randomNumbers);
 
-// console.log(sortingAlgorithms);
-console.log(sortingAlgorithms.insertionSort());
+sortingAlgorithms.mergeSort(randomNumbers);
