@@ -5,4 +5,5 @@ export interface ISortingAlgorithms<T> {
   selectionSort: () => T[];
   insertionSort: () => T[];
   mergeSort: (arr: T[]) => T[];
+  // quickSort: (arr: T[]) => T[];
 }

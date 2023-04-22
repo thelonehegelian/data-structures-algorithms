@@ -12,7 +12,6 @@ numbers.sort((a, b) => a - b);
 let randomNumbers = generateRandomNumbers(10);
 let randomCityNames = generateRandomCityNames();
 
-const sortingAlgorithms: ISortingAlgorithms<number> =
-  new SortingAlgorithms<number>(randomNumbers);
+const sortingAlgorithms = new SortingAlgorithms<number>(randomNumbers);
 
-sortingAlgorithms.mergeSort(randomNumbers);
+console.log(sortingAlgorithms.quickSort(randomNumbers));
