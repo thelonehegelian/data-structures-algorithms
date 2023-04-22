@@ -9,9 +9,11 @@ import DoublyLinkedList from './data-structures/linked-lists/doubly-linked-list'
 const numbers = generateRandomNumbers(10);
 numbers.sort((a, b) => a - b);
 
-let randomNumbers = generateRandomNumbers(10);
+let randomNumbers = generateRandomNumbers(100000);
 let randomCityNames = generateRandomCityNames();
 
 const sortingAlgorithms = new SortingAlgorithms<number>(randomNumbers);
 
-console.log(sortingAlgorithms.quickSort(randomNumbers));
+// console.log(sortingAlgorithms.quickSort(randomNumbers));
+// console.log(sortingAlgorithms.mergeSort(randomNumbers));
+console.log(sortingAlgorithms.radixSort(randomNumbers));

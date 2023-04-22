@@ -4,7 +4,7 @@ const num_el = 10;
 export function generateRandomNumbers(amountOfValues: number): number[] {
   let randomNumbers: number[] = [];
   for (let i = 0; i < amountOfValues; i++) {
-    randomNumbers.push(Math.floor(Math.random() * 100));
+    randomNumbers.push(Math.floor(Math.random() * 1000000));
   }
   return randomNumbers;
 }

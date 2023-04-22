@@ -68,7 +68,6 @@ export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
   }
 
   public insertionSort(): T[] {
-    console.log(this.input);
     for (let i = 1; i < this.input.length; i++) {
       let currentVal = this.input[i];
       let j = i - 1;
@@ -85,7 +84,6 @@ export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
     let mid = Math.floor(arr.length / 2);
     let left = this.mergeSort(arr.slice(0, mid));
     let right = this.mergeSort(arr.slice(mid));
-    console.log(this.mergeSortedArrays(left, right));
     return this.mergeSortedArrays(left, right);
   }
 
@@ -109,8 +107,44 @@ export class SortingAlgorithms<T> implements ISortingAlgorithms<T> {
     }
     return this.quickSort(left).concat([pivotValue], this.quickSort(right));
   }
+  // @todo alternative implementation of quickSort without creating new arrays
 
-  // private pivot = (arr: T[], start = 0, end = arr.length - 1): number => {};
+  public radixSort = (arr: number[]): number[] => {
+    // let buckets: number[][] = [];
+    let buckets: number[][] = Array.from({ length: 10 }, () => []);
+    let sortedArray: number[] = [];
+    let maxDigits = this.mostDigits(arr);
+    for (let k = 0; k < maxDigits; k++) {
+      for (const element of arr) {
+        let digit = this.getDigit(element, k);
+        if (!buckets[digit]) {
+          buckets[digit] = [];
+        }
+        buckets[digit].push(element);
+      }
+      sortedArray = ([] as number[]).concat(...buckets);
+      arr = sortedArray;
+      // Clear buckets
+      buckets.forEach((bucket) => (bucket.length = 0));
+    }
+    return sortedArray;
+  };
+
+  private getDigit(num: number, place: number): number {
+    return Math.floor(Math.abs(num) / Math.pow(10, place)) % 10;
+  }
+  private digitCount(num: number): number {
+    if (num === 0) return 1;
+    return Math.floor(Math.log10(Math.abs(num))) + 1;
+  }
+  private mostDigits(arr: number[]): number {
+    let maxDigits = 0;
+    for (let i = 0; i < arr.length; i++) {
+      maxDigits = Math.max(maxDigits, this.digitCount(arr[i]));
+    }
+    return maxDigits;
+  }
+
   private mergeSortedArrays(arr1: T[], arr2: T[]): T[] {
     let i = 0;
     let j = 0;
