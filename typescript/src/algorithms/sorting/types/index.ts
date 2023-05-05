@@ -6,5 +6,5 @@ export interface ISortingAlgorithms<T> {
   insertionSort: () => T[];
   mergeSort: (arr: T[]) => T[];
   quickSort: (arr: T[]) => T[];
-  radixSort: (arr: T[]) => T[];
+  // radixSort: (arr: T[]) => T[];
 }
