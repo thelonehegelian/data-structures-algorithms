@@ -4,6 +4,7 @@ import { generateRandomNumbers, generateRandomCityNames } from './test-data';
 import { SortingAlgorithms } from '../src/algorithms/sorting';
 import { ISortingAlgorithms } from './algorithms/sorting/types/index';
 import DoublyLinkedList from './data-structures/linked-lists/doubly-linked-list';
+import BinaryTree from './data-structures/trees/binaryTree';
 
 // an array of 10 sorted numbers
 const numbers = generateRandomNumbers(10);
@@ -14,6 +15,10 @@ let randomCityNames = generateRandomCityNames();
 
 const sortingAlgorithms = new SortingAlgorithms<number>(randomNumbers);
 
-// console.log(sortingAlgorithms.quickSort(randomNumbers));
-// console.log(sortingAlgorithms.mergeSort(randomNumbers));
-console.log(sortingAlgorithms.radixSort(randomNumbers));
+const binaryTree = new BinaryTree();
+binaryTree.insert(10);
+binaryTree.insert(5);
+binaryTree.insert(15);
+binaryTree.insert(2);
+binaryTree.insert(7);
+console.log(binaryTree);
