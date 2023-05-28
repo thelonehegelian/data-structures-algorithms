@@ -68,6 +68,28 @@ class BinaryTree {
       if (current === null) return false;
     }
   }
+
+  bfs(value: number) {
+    if (this.root === null) return false;
+    let queue: Node[] = [];
+    let current: Node | null = this.root;
+    let found = false;
+    // traverse the tree
+    while (current && !found) {
+      if (value < current.value) {
+        // the root is now the left node
+        current = current.left;
+      } else if (value > current.value) {
+        // the root is now the right node
+        current = current.right;
+      } else {
+        found = true;
+      }
+      if (current === null) return false;
+    }
+  
+    
+  }
 }
 
 export default BinaryTree;
