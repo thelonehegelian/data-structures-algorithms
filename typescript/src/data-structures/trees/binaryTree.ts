@@ -124,6 +124,37 @@ class BinaryTree {
     return false;
   }
 
+  dfsPostOrder(value: number) {
+    if (this.root === null) return false;
+
+    return this._dfsPostOrder(this.root, value);
+
+  }
+
+  private _dfsPostOrder(current: Node | null, value: number) {
+    if (current === null) return false;
+
+    // if there is a left node, recursively call this function on the left node
+    if (current.left !== null) {
+      if (this._dfsPostOrder(current.left, value)) {
+        return true;
+      }
+
+    }
+    // if there is a right node, recursively call this function on the right node
+    if (current.right !== null) {
+      if (this._dfsPostOrder(current.right, value)) {
+        return true;
+      }
+    }
+
+    // Check the current node after its descendants
+    if (current.value === value) return true;
+
+    return false;
+
+  }
+
 }
 
 export default BinaryTree;

@@ -23,7 +23,7 @@ binaryTree.insert(2);
 binaryTree.insert(4);
 binaryTree.insert(6);
 // search for a number using bfs
-console.log(binaryTree.dfsPreOrder(6));
-console.log(binaryTree.dfsPreOrder(600));
+console.log(binaryTree.dfsPostOrder(6));
+console.log(binaryTree.dfsPostOrder(3));
 
 
