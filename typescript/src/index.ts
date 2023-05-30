@@ -15,10 +15,15 @@ let randomNumbers = generateRandomNumbers(100000);
 let randomCityNames = generateRandomCityNames();
 
 
-// define test cases for Queue
-const queue = new Queue();
-queue.enqueue(1);
-queue.enqueue(2);
-queue.enqueue(3);
-console.log(queue);
-console.log(queue.dequeue());
+const binaryTree = new BinaryTree();
+binaryTree.insert(5);
+binaryTree.insert(3);
+binaryTree.insert(7);
+binaryTree.insert(2);
+binaryTree.insert(4);
+binaryTree.insert(6);
+// search for a number using bfs
+console.log(binaryTree.dfsPreOrder(6));
+console.log(binaryTree.dfsPreOrder(600));
+
+
