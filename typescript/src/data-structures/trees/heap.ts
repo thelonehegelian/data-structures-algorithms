@@ -1,6 +1,6 @@
 
 
-
+// @todo add priority queue
 class Heap<T> {
   values: T[];
   constructor() {
@@ -77,6 +77,7 @@ class Heap<T> {
       index = swap;
     }
   }
+
 
 }
 
