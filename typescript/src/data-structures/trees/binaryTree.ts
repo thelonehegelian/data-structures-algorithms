@@ -73,6 +73,7 @@ class BinaryTree {
     }
   }
 
+  // @todo redo all these
   bfs(value: number) {
     if (this.root === null) return false;
 
@@ -153,6 +154,24 @@ class BinaryTree {
 
     return false;
 
+  }
+
+  dfsInOrder(value: number) {
+    if (this.root === null) return false;
+
+    return this._dfsInOrder(this.root);
+  }
+  private _dfsInOrder(current: Node | null) {
+    if (current === null) return;
+
+    // first recur on left child
+    this._dfsInOrder(current.left);
+
+    // then print the data of node
+    console.log(current.value);
+
+    // now recur on right child
+    this._dfsInOrder(current.right);
   }
 
 }
