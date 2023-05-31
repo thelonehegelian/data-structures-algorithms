@@ -28,11 +28,7 @@ class MerkleTrie {
     // @note performing hashing inside the Trie for learning purposes
     // the key is usually hashed outside the Trie
     let hash: string = crypto.SHA256(key).toString();
-    // for char in key
-    // if char is not in  node.children
-    // then create a new node and add it to node.children
-    // else
-    // node = node.children[char]
+
     /*
     This loop traverses the given hash string character by character, 
     and for each character, it checks if a child node exists 
