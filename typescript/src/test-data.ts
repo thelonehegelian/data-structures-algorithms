@@ -30,6 +30,18 @@ const cityNames = [
   'Seattle',
   'Denver',
   'Washington DC',
+  'Boston',
+  'El Paso',
+  'Nashville',
+  'Detroit',
+  'Portland',
+  'Memphis',
+  'Oklahoma City',
+  'Las Vegas',
+  'Louisville',
+  'Baltimore',
+  'Milwaukee',
+  'Albuquerque',
 ];
 
 export function generateRandomCityNames(): string[] {
