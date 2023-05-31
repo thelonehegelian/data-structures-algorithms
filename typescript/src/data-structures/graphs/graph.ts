@@ -1,8 +1,5 @@
-interface IVertex {
-  data: any;
-  name: string;
-  edges: IEdge[];
-}
+import { IVertex, IEdge, IGraph } from './types';
+
 class Vertex implements IVertex {
   data: any;
   name: string;
@@ -15,10 +12,6 @@ class Vertex implements IVertex {
   }
 }
 
-interface IEdge {
-  startVertex: IVertex;
-  endVertex: IVertex;
-}
 
 // edge is a connection between two vertices
 class Edge implements IEdge {
@@ -30,16 +23,7 @@ class Edge implements IEdge {
   }
 }
 
-interface IGraph {
-  listOfVertices: IVertex[];
 
-  addVertex(vertex: IVertex): void;
-  addEdge(edge: IEdge): void;
-  removeEdge(edge: IEdge): void;
-  removeVertex(vertex: IVertex): void;
-  dfsTraversal(startVertex: IVertex): void;
-  bfsTraversal(startVertex: IVertex): void;
-}
 
 
 class Graph implements IGraph {
