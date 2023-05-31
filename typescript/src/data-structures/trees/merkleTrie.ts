@@ -107,10 +107,21 @@ Value found at last.
       }
       currentNode = currentNode.children[character];
     }
-    return currentNode.value;
+
+    // @note returning the node so as to make the delete method  and value retrieval easier
+    return currentNode
+
   }
 
-
+  // Find the node corresponding to the key using the get method, set its value to undefined, and update the parent node hashes.
+  delete(key: string) {
+    // use the get method to check if the key exists
+    const node = this.get(key) as TrieNode;
+    if (node) {
+      node.value = undefined;
+      this.updataParentHashes(node);
+    }
+  }
 }
 
 export default MerkleTrie;
