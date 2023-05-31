@@ -1,3 +1,8 @@
+/*
+  This TypeScript code defines a Merkle Trie data structure for storing key-value pairs with 
+  SHA256 cryptographic hashing, providing methods for inserting, deleting and getting values by keys, 
+  as well as internally updating cryptographic hashes of each node upon changes.
+ */
 import crypto = require('crypto-js');
 class TrieNode {
   key: string;
