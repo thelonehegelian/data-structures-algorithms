@@ -1,9 +1,4 @@
-
-interface IStackNode<T> {
-  value: T;
-  next: StackNode<T> | null;
-}
-
+import { IStack, IStackNode } from "./types";
 class StackNode<T> implements IStackNode<T> {
   value: T;
   next: StackNode<T> | null;
@@ -15,12 +10,6 @@ class StackNode<T> implements IStackNode<T> {
 }
 
 
-interface IStack<T> {
-  top: StackNode<T> | null;
-  length: number;
-  push(value: T): IStack<T>;
-  pop(): IStack<T> | undefined;
-}
 class Stack<T> implements IStack<T>{
   top: StackNode<T> | null;
   length: number;

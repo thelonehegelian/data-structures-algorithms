@@ -1,6 +1,7 @@
-class Nowd<T> {
+import { IQueue, IQueueNode } from "./types";
+class QueueNode<T> implements IQueueNode<T>{
   value: T;
-  next: Nowd<T> | null;
+  next: QueueNode<T> | null;
 
   constructor(value: T) {
     this.value = value;
@@ -9,9 +10,11 @@ class Nowd<T> {
 }
 
 
-class Queue<T> {
-  front: Nowd<T> | null;
-  back: Nowd<T> | null;
+
+
+class Queue<T> implements IQueue<T> {
+  front: IQueueNode<T> | null;
+  back: IQueueNode<T> | null;
   length: number;
 
   constructor() {
@@ -20,24 +23,24 @@ class Queue<T> {
     this.length = 0;
   }
 
-  enqueue = (value: T): Queue<T> => {
-    const newNode = new Nowd<T>(value);
+  enqueue = (value: T): IQueue<T> => {
+    const newNode = new QueueNode<T>(value);
 
     if (!this.front) {
       this.front = newNode;
       this.back = this.front;
     }
-    else  {
+    else {
       if (!this.back) return this;
       this.back.next = newNode;
       this.back = newNode;
-     
+
     }
     this.length++;
     return this;
   }
 
-  dequeue = (): Queue<T> | undefined => {
+  dequeue = (): IQueue<T> | undefined => {
     if (!this.front) return undefined;
     const currentFront = this.front;
     this.front = currentFront.next;

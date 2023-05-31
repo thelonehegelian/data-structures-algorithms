@@ -1,4 +1,6 @@
-class DoublyLinkedListNode {
+
+import { IDoublyLinkListNode, IDoublyLinkedList } from "./types";
+class DoublyLinkedListNode implements IDoublyLinkListNode {
   value: any;
   next: DoublyLinkedListNode | null;
   prev: DoublyLinkedListNode | null;
@@ -9,7 +11,10 @@ class DoublyLinkedListNode {
   }
 }
 
-class DoublyLinkedList {
+
+
+
+class DoublyLinkedList implements IDoublyLinkedList {
   head: DoublyLinkedListNode | null;
   tail: DoublyLinkedListNode | null;
   length: number;
