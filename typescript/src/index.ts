@@ -7,6 +7,7 @@ import DoublyLinkedList from './data-structures/linked-lists/doubly-linked-list'
 import BinaryTree from './data-structures/trees/binaryTree';
 import Queue from './data-structures/stacks-and-queues/queues';
 import Heap from './data-structures/trees/heap';
+import MerkleTrie from './data-structures/trees/merkleTrie';
 // an array of 10 sorted numbers
 const numbers = generateRandomNumbers(10);
 numbers.sort((a, b) => a - b);
@@ -14,9 +15,8 @@ numbers.sort((a, b) => a - b);
 let randomNumbers = generateRandomNumbers(5);
 let randomCityNames = generateRandomCityNames();
 
-// create Heap instance
-const heap = new Heap<number>();
-// insert values into heap
-randomNumbers.forEach((number) => heap.insert(number));
-console.log(heap.values);
-console.log(heap.extractMax());
+// test MerkleTrie
+const trie = new MerkleTrie();
+trie.insert("hello", 1);
+
+console.log(trie.root.children);
