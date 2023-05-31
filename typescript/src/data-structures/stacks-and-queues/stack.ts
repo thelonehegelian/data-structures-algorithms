@@ -1,6 +1,12 @@
-class Nowd<T> {
+
+interface IStackNode<T> {
   value: T;
-  next: Nowd<T> | null;
+  next: StackNode<T> | null;
+}
+
+class StackNode<T> implements IStackNode<T> {
+  value: T;
+  next: StackNode<T> | null;
 
   constructor(value: T) {
     this.value = value;
@@ -8,8 +14,15 @@ class Nowd<T> {
   }
 }
 
-class Stack<T> {
-  top: Nowd<T> | null;
+
+interface IStack<T> {
+  top: StackNode<T> | null;
+  length: number;
+  push(value: T): IStack<T>;
+  pop(): IStack<T> | undefined;
+}
+class Stack<T> implements IStack<T>{
+  top: StackNode<T> | null;
   length: number;
 
   constructor() {
@@ -18,7 +31,7 @@ class Stack<T> {
   }
 
   push = (value: T): Stack<T> => {
-    const newNode = new Nowd<T>(value);
+    const newNode = new StackNode<T>(value);
     // if the stack is empty, set the top to the new node
     if (!this.top) {
       this.top = newNode;
