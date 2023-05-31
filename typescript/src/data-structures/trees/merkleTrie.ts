@@ -92,6 +92,25 @@ class MerkleTrie {
     }
   }
 
+
+  /* 
+  A key is sought here,
+Traversing the tree's branches,
+Value found at last.
+ */
+  get(key: string) {
+    let currentNode = this.root;
+    for (const char of key) {
+      const character = char;
+      if (!(character in this.root.children)) {
+        return false;
+      }
+      currentNode = currentNode.children[character];
+    }
+    return currentNode.value;
+  }
+
+
 }
 
 export default MerkleTrie;
