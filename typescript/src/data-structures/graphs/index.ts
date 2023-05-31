@@ -1,33 +1,56 @@
-class Vertex {
-  data = null;
-  name = null;
-  edges = [];
+interface IVertex {
+  data: any;
+  name: string;
+  edges: IEdge[];
+}
+class Vertex implements IVertex {
+  data: any;
+  name: string;
+  edges: IEdge[];
   constructor(name: string, data: any) {
     this.name = name;
     this.data = data;
+    this.edges = [];
 
   }
 }
 
+interface IEdge {
+  startVertex: IVertex;
+  endVertex: IVertex;
+}
+
 // edge is a connection between two vertices
-class Edge {
-  startVertex = null;
-  endVertex = null;
+class Edge implements IEdge {
+  startVertex: IVertex;
+  endVertex: IVertex;
   constructor(startVertex: Vertex, endVertex: Vertex) {
     this.startVertex = startVertex;
     this.endVertex = endVertex;
   }
 }
 
-class Graph {
+interface IGraph {
+  listOfVertices: IVertex[];
+
+  addVertex(vertex: IVertex): void;
+  addEdge(edge: IEdge): void;
+  removeEdge(edge: IEdge): void;
+  removeVertex(vertex: IVertex): void;
+  dfsTraversal(startVertex: IVertex): void;
+  bfsTraversal(startVertex: IVertex): void;
+}
+
+
+class Graph implements IGraph {
   // an adjacency list is a list of vertices and edges
-  listOfVertices: Array<Vertex>;
+  listOfVertices: IVertex[];
 
   constructor() {
     this.listOfVertices = [];
   }
 
-  addVertex(vertex: Vertex) {
+  addVertex(vertex: IVertex) {
     // check if the vertex already exists
     // @audit update this
     for (let i = 0; i < this.listOfVertices.length; i++) {
@@ -38,13 +61,14 @@ class Graph {
     this.listOfVertices.push(vertex);
 
   }
-  addEdge(edge: Edge) {
+  addEdge(edge: IEdge) {
     // @note not checking if the edge already exists
     edge.startVertex.edges.push(edge);
     edge.endVertex.edges.push(edge);
   }
 
-  removeEdge(edge: Edge) {
+  // @refactor
+  removeEdge(edge: IEdge) {
     // find the edge in the list of edges
     for (let i = 0; i < this.listOfVertices.length; i++) {
       if (this.listOfVertices[i].name === edge.startVertex.name) {
@@ -60,7 +84,7 @@ class Graph {
 
   }
 
-  removeVertex(vertex: Vertex) {
+  removeVertex(vertex: IVertex) {
     // remove both edges and vertices
     this.listOfVertices = this.listOfVertices.filter(v => v.name !== vertex.name);
     this.listOfVertices.forEach(v => {
@@ -71,7 +95,7 @@ class Graph {
   // @todo add recursive dfs traversal
   // @note this is depth first search 
   // the function takes a start vertex 
-  dfsTraversal(startVertex: Vertex) {
+  dfsTraversal(startVertex: IVertex) {
     // keep track of visited vertices
     let visited = {};
     let result = [];
@@ -94,7 +118,7 @@ class Graph {
 
   // @todo add recursive bfs traversal
   // @note this is breadth first search
-  bfsTraversal(startVertex: Vertex) {
+  bfsTraversal(startVertex: IVertex) {
     let visited = {};
     let result = [];
     let queue = [];
