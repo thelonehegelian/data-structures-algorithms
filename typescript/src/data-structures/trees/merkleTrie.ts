@@ -4,12 +4,21 @@
   as well as internally updating cryptographic hashes of each node upon changes.
  */
 import crypto = require('crypto-js');
-class TrieNode {
+
+// interface for a node in the Merkle Trie
+interface ITrieNode {
   key: string;
   value: number;
-  children: { [key: string]: TrieNode };
+  children: { [key: string]: ITrieNode };
   hash: string;
-  parent: TrieNode | null;
+  parent: ITrieNode | null;
+}
+class TrieNode implements ITrieNode {
+  key: string;
+  value: number;
+  children: { [key: string]: ITrieNode };
+  hash: string;
+  parent: ITrieNode | null;
   constructor(key: string) {
     this.key = key;
     this.value = null;
@@ -19,8 +28,17 @@ class TrieNode {
   }
 }
 
-class MerkleTrie {
-  root: TrieNode;
+// interface for the Merkle Trie
+interface IMerkleTrie {
+  root: ITrieNode;
+  insert(key: string, value: number): void;
+  delete(key: string): void;
+  get(key: string): boolean | ITrieNode;
+  // updateHash(node: ITrieNode): void;
+}
+
+class MerkleTrie implements IMerkleTrie {
+  root: ITrieNode;
 
 
   constructor() {
@@ -99,7 +117,7 @@ class MerkleTrie {
 Traversing the tree's branches,
 Value found at last.
  */
-  get(key: string) {
+  get(key: string): ITrieNode | boolean {
     let currentNode = this.root;
     for (const char of key) {
       const character = char;
@@ -109,15 +127,15 @@ Value found at last.
       currentNode = currentNode.children[character];
     }
 
-    // @note returning the node so as to make the delete method  and value retrieval easier
+    // @note returning the node so as to make the delete method and value retrieval easier
+    // @note probably not the best idea to return boolean or node, should be consistent
     return currentNode
-
   }
 
   // Find the node corresponding to the key using the get method, set its value to undefined, and update the parent node hashes.
   delete(key: string) {
     // use the get method to check if the key exists
-    const node = this.get(key) as TrieNode;
+    const node = this.get(key) as ITrieNode;
     if (node) {
       node.value = undefined;
       this.updataParentHashes(node);
