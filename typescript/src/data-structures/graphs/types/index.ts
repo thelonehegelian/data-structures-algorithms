@@ -20,3 +20,12 @@ export interface IGraph {
   dfsTraversal(startVertex: IVertex): void;
   bfsTraversal(startVertex: IVertex): void;
 }
+
+export interface IWeightedVertex extends IVertex {
+  weight: number;
+}
+
+
+export interface IWeightedEdge extends IEdge {
+  weight: number;
+}

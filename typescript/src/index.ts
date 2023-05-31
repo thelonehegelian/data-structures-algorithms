@@ -8,6 +8,8 @@ import BinaryTree from './data-structures/trees/binaryTree';
 import Queue from './data-structures/stacks-and-queues/queues';
 import Heap from './data-structures/trees/heap';
 import MerkleTrie from './data-structures/trees/merkleTrie';
+import { WeightedGraph } from './data-structures/graphs/graph';
+import { IWeightedEdge, IWeightedVertex } from './data-structures/graphs/types/index';
 // an array of 10 sorted numbers
 const numbers = generateRandomNumbers(10);
 numbers.sort((a, b) => a - b);
@@ -15,8 +17,32 @@ numbers.sort((a, b) => a - b);
 let randomNumbers = generateRandomNumbers(5);
 let randomCityNames = generateRandomCityNames();
 
-// test MerkleTrie
-const trie = new MerkleTrie();
-trie.insert("hello", 1);
+// create a WeightedGraph
+const weightedGraph = new WeightedGraph();
+// add vertices
+randomCityNames.forEach((city) => {
+  // create a vertex
+  let vertex: IWeightedVertex = {
+    data: city,
+    name: city,
+    edges: [],
+    weight: Math.floor(Math.random() * 100)
+  };
 
-console.log(trie.root.children);
+  weightedGraph.addVertex(vertex);
+});
+
+// add edges
+weightedGraph.listOfVertices.forEach((vertex) => {
+  // create an edge
+  let edge: IWeightedEdge = {
+    startVertex: vertex,
+    endVertex: weightedGraph.listOfVertices[Math.floor(Math.random() * weightedGraph.listOfVertices.length)],
+    weight: Math.floor(Math.random() * 100)
+  };
+
+  weightedGraph.addEdge(edge);
+}
+)
+
+console.log(weightedGraph.listOfVertices);

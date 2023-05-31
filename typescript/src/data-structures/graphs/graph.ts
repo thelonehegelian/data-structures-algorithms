@@ -1,4 +1,4 @@
-import { IVertex, IEdge, IGraph } from './types';
+import { IVertex, IEdge, IGraph, IWeightedEdge, IWeightedVertex } from './types';
 
 class Vertex implements IVertex {
   data: any;
@@ -13,6 +13,10 @@ class Vertex implements IVertex {
 }
 
 
+
+
+
+// @audit why am I not using this?
 // edge is a connection between two vertices
 class Edge implements IEdge {
   startVertex: IVertex;
@@ -118,5 +122,23 @@ class Graph implements IGraph {
         }
       });
     }
+  }
+}
+
+
+export class WeightedGraph extends Graph {
+  listOfVertices: IWeightedVertex[];
+  constructor() {
+    super();
+    this.listOfVertices = [];
+  }
+  addWeightedVertex(weightedVertex: IWeightedVertex): void {
+    // @note not checking if the vertex already exists
+    this.listOfVertices.push(weightedVertex);
+  }
+  addWeightedEdge(edge: IEdge): void {
+    // @note not checking if the edge already exists
+    edge.startVertex.edges.push(edge);
+    edge.endVertex.edges.push(edge);
   }
 }
