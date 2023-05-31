@@ -33,3 +33,4 @@
 - [ ] add interfaces for binaryTree.ts
 - [ ] redo binaryTree search methods (excessive if statements)
 - [ ] add priorityQueue to heap.ts
+- [ ] Implement Hash Table
