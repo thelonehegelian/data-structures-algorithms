@@ -1,11 +1,13 @@
-// import interfaces 
-import { IBinaryTree, INode } from '../trees/types/index';
-// @todo implement the interfaces
-
-class Node {
+interface IBinaryTreeNode {
   value: number;
-  left: Node | null;
-  right: Node | null;
+  left: IBinaryTreeNode | null;
+  right: IBinaryTreeNode | null;
+}
+
+class BinaryTreeNode implements IBinaryTreeNode {
+  value: number;
+  left: IBinaryTreeNode | null;
+  right: IBinaryTreeNode | null;
 
   constructor(value: number) {
     this.value = value;
@@ -14,8 +16,9 @@ class Node {
   }
 }
 
+
 class BinaryTree {
-  root: Node | null;
+  root: IBinaryTreeNode | null;
 
   constructor() {
     this.root = null;
@@ -23,7 +26,7 @@ class BinaryTree {
 
   insert(value: number) {
     // create a new node with the value passed to the function
-    const newNode = new Node(value);
+    const newNode = new BinaryTreeNode(value);
 
     // if there is no root property on the tree, set the root to be the newly created node
     if (this.root === null) {
@@ -31,7 +34,7 @@ class BinaryTree {
       return this;
     }
 
-    let current: Node | null = this.root;
+    let current: IBinaryTreeNode | null = this.root;
     // loop through the tree and find the correct position for the new node
     while (true) {
       // value is less than the value of the current node, go left
@@ -56,7 +59,7 @@ class BinaryTree {
   }
   find(value: number) {
     if (this.root === null) return false;
-    let current: Node | null = this.root;
+    let current: IBinaryTreeNode | null = this.root;
     let found = false;
     // traverse the tree
     while (current && !found) {
@@ -77,15 +80,15 @@ class BinaryTree {
   bfs(value: number) {
     if (this.root === null) return false;
 
-    let queue: Node[] = [];
-    let current: Node | null = this.root;
+    let queue: IBinaryTreeNode[] = [];
+    let current: IBinaryTreeNode | null = this.root;
 
     if (current !== null) {
       queue.push(current);
     }
 
     while (queue.length) {
-      current = queue.shift() as Node | null;
+      current = queue.shift() as IBinaryTreeNode | null;
       if (current === null) continue; // Undefined check
       if (current.value === value) return true;
       if (current.left !== null) queue.push(current.left);
@@ -103,7 +106,7 @@ class BinaryTree {
   }
 
   // @todo refactor to remove excessive if statements
-  private _dfsPreOrder(current: Node | null, value: number) {
+  private _dfsPreOrder(current: IBinaryTreeNode | null, value: number) {
     if (current === null) return false;
 
     if (current.value === value) return true;
@@ -132,7 +135,7 @@ class BinaryTree {
 
   }
 
-  private _dfsPostOrder(current: Node | null, value: number) {
+  private _dfsPostOrder(current: IBinaryTreeNode | null, value: number) {
     if (current === null) return false;
 
     // if there is a left node, recursively call this function on the left node
@@ -161,7 +164,7 @@ class BinaryTree {
 
     return this._dfsInOrder(this.root);
   }
-  private _dfsInOrder(current: Node | null) {
+  private _dfsInOrder(current: IBinaryTreeNode | null) {
     if (current === null) return;
 
     // first recur on left child
