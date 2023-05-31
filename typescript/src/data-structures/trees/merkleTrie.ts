@@ -4,15 +4,8 @@
   as well as internally updating cryptographic hashes of each node upon changes.
  */
 import crypto = require('crypto-js');
+import { ITrieNode, IMerkleTrie } from './types';
 
-// interface for a node in the Merkle Trie
-interface ITrieNode {
-  key: string;
-  value: number;
-  children: { [key: string]: ITrieNode };
-  hash: string;
-  parent: ITrieNode | null;
-}
 class TrieNode implements ITrieNode {
   key: string;
   value: number;
@@ -28,14 +21,7 @@ class TrieNode implements ITrieNode {
   }
 }
 
-// interface for the Merkle Trie
-interface IMerkleTrie {
-  root: ITrieNode;
-  insert(key: string, value: number): void;
-  delete(key: string): void;
-  get(key: string): boolean | ITrieNode;
-  // updateHash(node: ITrieNode): void;
-}
+
 
 class MerkleTrie implements IMerkleTrie {
   root: ITrieNode;

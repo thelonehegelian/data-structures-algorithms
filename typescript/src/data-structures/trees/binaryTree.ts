@@ -1,8 +1,4 @@
-interface IBinaryTreeNode {
-  value: number;
-  left: IBinaryTreeNode | null;
-  right: IBinaryTreeNode | null;
-}
+import { IBinaryTreeNode, IBinaryTree } from "./types";
 
 class BinaryTreeNode implements IBinaryTreeNode {
   value: number;
@@ -17,14 +13,16 @@ class BinaryTreeNode implements IBinaryTreeNode {
 }
 
 
-class BinaryTree {
+
+
+class BinaryTree implements IBinaryTree {
   root: IBinaryTreeNode | null;
 
   constructor() {
     this.root = null;
   }
 
-  insert(value: number) {
+  insert(value: number): BinaryTree | undefined {
     // create a new node with the value passed to the function
     const newNode = new BinaryTreeNode(value);
 
@@ -57,7 +55,7 @@ class BinaryTree {
       }
     }
   }
-  find(value: number) {
+  find(value: number): boolean | IBinaryTreeNode {
     if (this.root === null) return false;
     let current: IBinaryTreeNode | null = this.root;
     let found = false;
@@ -77,7 +75,7 @@ class BinaryTree {
   }
 
   // @todo redo all these
-  bfs(value: number) {
+  bfs(value: number): boolean | void {
     if (this.root === null) return false;
 
     let queue: IBinaryTreeNode[] = [];
@@ -98,7 +96,7 @@ class BinaryTree {
     return false; // Return false if value is not found
   }
 
-  dfsPreOrder(value: number) {
+  dfsPreOrder(value: number): boolean | void {
     if (this.root === null) return false;
 
     return this._dfsPreOrder(this.root, value);
@@ -106,7 +104,7 @@ class BinaryTree {
   }
 
   // @todo refactor to remove excessive if statements
-  private _dfsPreOrder(current: IBinaryTreeNode | null, value: number) {
+  private _dfsPreOrder(current: IBinaryTreeNode | null, value: number): boolean {
     if (current === null) return false;
 
     if (current.value === value) return true;
@@ -128,14 +126,14 @@ class BinaryTree {
     return false;
   }
 
-  dfsPostOrder(value: number) {
+  dfsPostOrder(value: number): boolean | void {
     if (this.root === null) return false;
 
     return this._dfsPostOrder(this.root, value);
 
   }
 
-  private _dfsPostOrder(current: IBinaryTreeNode | null, value: number) {
+  private _dfsPostOrder(current: IBinaryTreeNode | null, value: number): boolean {
     if (current === null) return false;
 
     // if there is a left node, recursively call this function on the left node
@@ -159,7 +157,7 @@ class BinaryTree {
 
   }
 
-  dfsInOrder(value: number) {
+  dfsInOrder(value: number): boolean | void {
     if (this.root === null) return false;
 
     return this._dfsInOrder(this.root);
@@ -178,5 +176,7 @@ class BinaryTree {
   }
 
 }
+
+
 
 export default BinaryTree;
