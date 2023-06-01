@@ -1,4 +1,5 @@
 
 {"compilerOptions": {
   "strictPropertyInitialization": false,
+  "target": "ES2016"
  }}

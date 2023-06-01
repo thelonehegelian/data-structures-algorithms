@@ -10,6 +10,7 @@ import Heap from './data-structures/trees/heap';
 import MerkleTrie from './data-structures/trees/merkleTrie';
 import { WeightedGraph } from './data-structures/graphs/graph';
 import { IWeightedEdge, IWeightedVertex } from './data-structures/graphs/types/index';
+import { findShortestPath } from './algorithms/dijkstras-algorithm';
 // an array of 10 sorted numbers
 const numbers = generateRandomNumbers(10);
 numbers.sort((a, b) => a - b);
@@ -27,6 +28,7 @@ randomCityNames.forEach((city) => {
     name: city,
     edges: [],
     weight: Math.floor(Math.random() * 100)
+
   };
 
   weightedGraph.addVertex(vertex);
@@ -45,4 +47,8 @@ weightedGraph.listOfVertices.forEach((vertex) => {
 }
 )
 
-console.log(weightedGraph.listOfVertices);
+// find the shortest path
+let startVertex = weightedGraph.listOfVertices[0];
+let endVertex = weightedGraph.listOfVertices[weightedGraph.listOfVertices.length - 1];
+let shortestPath = findShortestPath(startVertex, endVertex);
+console.log("Shortest path is: ", shortestPath);

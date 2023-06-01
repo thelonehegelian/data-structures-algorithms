@@ -23,6 +23,7 @@ export interface IGraph {
 
 export interface IWeightedVertex extends IVertex {
   weight: number;
+  edges: IWeightedEdge[]; // edges are also weighted in a weighted graph
 }
 
 
