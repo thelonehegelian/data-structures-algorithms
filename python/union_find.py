@@ -1,3 +1,10 @@
+"""
+This is an implementation of the Union Find data structure. 
+It is used to keep track of citizens and their connections in the Star Wars universe.
+Citizens are monitored for Rebel activity, and if two citizens are found to belong to a rebel group, they are merged into one group.
+
+"""
+
 class Citizen:
     """
     A class to represent a citizen.
@@ -104,8 +111,10 @@ class StarMonitor:
         if citizen1_root == citizen2_root:
             return
 
+        # Pick either citizen1 or citizen2 to be the root of the new set
         if len(citizen1_root.group) > len(citizen2_root.group):
             citizen2_root.parent = citizen1_root
+             # Merge the groups by extending citizen1_root's group with citizen2_root's group
             citizen1_root.group.extend(citizen2_root.group)
             citizen2_root.group = citizen1_root.group
         else:
