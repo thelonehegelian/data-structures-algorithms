@@ -112,6 +112,7 @@ class StarMonitor:
             return
 
         # Pick either citizen1 or citizen2 to be the root of the new set
+        # @note this is not necessary, but it makes the tree more balanced and thus the find_citizen() method faster
         if len(citizen1_root.group) > len(citizen2_root.group):
             citizen2_root.parent = citizen1_root
              # Merge the groups by extending citizen1_root's group with citizen2_root's group
@@ -121,3 +122,12 @@ class StarMonitor:
             citizen1_root.parent = citizen2_root
             citizen2_root.group.extend(citizen1_root.group)
             citizen1_root.group = citizen2_root.group
+    
+    def is_connected(self, citizen1, citizen2):
+        if self.find_citizen(citizen1) == self.find_citizen(citizen2):
+            return True
+        
+        print("Citizen {} and {} are not connected".format(citizen1.val, citizen2.val))
+        return False
+        
+        

@@ -49,6 +49,9 @@ def test_star_monitor():
     for i in range(len(citizens) - 1):
         assert star_monitor.find_citizen(citizens[i]) == star_monitor.find_citizen(citizens[i + 1])
     
+    # test is_connected
+    assert star_monitor.is_connected(citizens[0], citizens[1]) == True
+    # assert star_monitor.is_connected(citizens[1], citizens[3]) == False
     print("All tests passed successfully!")
 
 # Run the tests
