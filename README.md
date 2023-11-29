@@ -3,6 +3,8 @@
 ## TODOs
 - [x] TypeScript
 - [ ] Python
+- [ ] Rust
+- [ ] Golang
 
 ## Data Structures
 
