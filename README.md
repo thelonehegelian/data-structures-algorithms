@@ -1,5 +1,9 @@
 # DSA Implemented (so far)
 
+## TODOs
+- [x] TypeScript
+- [ ] Python
+
 ## Data Structures
 
 - Linked List
